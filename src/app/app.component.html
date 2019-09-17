@@ -1,0 +1,27 @@
+<h1>{{title}}</h1>
+
+<p>
+  <label for="searchInput" > Search select name Ch: </label>
+  <input id="searchInput" type="text" [(ngModel)]="searchTextInput" />
+</p>
+
+<div>
+  <ul class="game-list">
+    <!-- Все доступные чекбоксы для выбора -->
+    <li class="game-item"  *ngFor="let item of games">
+      <input type="checkbox" [(ngModel)]="item.selected" (change)="getSelected()"  />
+      <span class="game-text">{{item.name}}</span>
+    </li>
+  </ul>
+  
+
+  <div class="selected-games-wrap">
+    <!-- спомошью пайпа фильтруем активные чекбоксы -->
+      <div class="selected-game" *ngFor="let item of selectedGames | filter:searchTextInput" >
+        <span>
+          {{item.name}} <span class="delete-game" (click)="deleteGame(item.id)" title="Click to delete" >X</span>
+        </span>
+      </div>
+  </div>
+  
+</div>
